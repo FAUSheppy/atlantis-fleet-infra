@@ -32,7 +32,7 @@ auth:
     groupsClaim: groups
 
 authorization:
-  enabled: false
+  enabled: true
   defaults:
     readerGroups: []
     adminGroups:
