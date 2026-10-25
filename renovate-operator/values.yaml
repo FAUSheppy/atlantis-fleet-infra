@@ -2,7 +2,7 @@ replicaCount: 1
 
 ingress:
   enabled: true
-  ingressClassName: nginx
+  ingressClassName: traefik
 
   host: renovate.services.atlantishq.de
 
@@ -19,10 +19,10 @@ auth:
   oidc:
     enabled: true
 
-    issuerUrl: "https://keycloak.example.com/realms/master"
+    issuerUrl: "https://keycloak.atlantishq.de/realms/master"
     clientId: "renovate"
 
-    existingSecret: renovate-oidc
+    existingSecret: renovate-oidc-config
     secretKey: client-secret
 
     redirectScheme: https
@@ -32,8 +32,17 @@ auth:
     groupsClaim: groups
 
 authorization:
-  # For now: every authenticated OIDC user can access the UI.
   enabled: false
+  defaults:
+    readerGroups: []
+    adminGroups:
+      - atlantis-admins
+
+    readerUsers: []
+    adminUsers: []
+
+    anonymousRead: false
+    anonymousReadLogs: false
 
 
 valkey:
