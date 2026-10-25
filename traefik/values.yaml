@@ -1,0 +1,62 @@
+additionalArguments:
+  - --api.insecure=true
+  - --api.dashboard=true
+  - --ping=true
+  - --entrypoints.beats.address=:5044
+  - --entrypoints.websecure.proxyProtocol.trustedIPs=0.0.0.0
+  - --entrypoints.websecure.transport.respondingTimeouts.readTimeout=0
+  - --entrypoints.websecure.transport.respondingTimeouts.writeTimeout=0
+  - --entrypoints.websecure.transport.respondingTimeouts.idleTimeout=10m
+  - --providers.kubernetescrd.allowCrossNamespace=true
+  - --accesslog=true
+
+deployment:
+  podAnnotations:
+    prometheus.io/port: "8082"
+    prometheus.io/scrape: "true"
+
+global:
+  systemDefaultRegistry: ""
+
+image:
+  repository: rancher/mirrored-library-traefik
+  tag: 2.11.18
+
+ingressRoute:
+  dashboard:
+    enabled: true
+
+priorityClassName: system-cluster-critical
+
+providers:
+  kubernetesCRD:
+    allowCrossNamespace: true
+  kubernetesIngress:
+    publishedService:
+      enabled: true
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 1Gi
+
+service:
+  ipFamilyPolicy: PreferDualStack
+  ports:
+    beats:
+      port: 5044
+      expose: true
+      exposedPort: 5044
+      protocol: TCP
+
+tolerations:
+  - key: CriticalAddonsOnly
+    operator: Exists
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+    operator: Exists
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Exists

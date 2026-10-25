@@ -1,0 +1,48 @@
+replicaCount: 1
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+
+  host: renovate.services.atlantishq.de
+
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+
+  tls:
+    - hosts:
+        - renovate.services.atlantishq.de
+      secretName: renovate-services-atlantishq-de-tls
+
+
+auth:
+  oidc:
+    enabled: true
+
+    issuerUrl: "https://keycloak.example.com/realms/master"
+    clientId: "renovate"
+
+    existingSecret: renovate-oidc
+    secretKey: client-secret
+
+    redirectScheme: https
+
+    pkceEnabled: true
+
+    groupsClaim: groups
+
+authorization:
+  # For now: every authenticated OIDC user can access the UI.
+  enabled: false
+
+
+valkey:
+  enabled: false
+
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 512Mi
