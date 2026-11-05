@@ -14,6 +14,11 @@ ingress:
         - renovate.services.atlantishq.de
       secretName: renovate-services-atlantishq-de-tls
 
+webhook:
+  enabled: true
+  ingress:
+    enabled: true
+    host: renovate-webhook.services.atlantishq.de
 
 auth:
   oidc:
