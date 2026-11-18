@@ -1,0 +1,10 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: katzencluster-ip-pool
+  namespace: default
+spec:
+  addresses:
+    - 192.168.123.200-192.168.123.210
+  autoAssign: true
+  avoidBuggyIPs: true

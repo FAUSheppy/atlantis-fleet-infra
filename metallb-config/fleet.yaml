@@ -1,0 +1,9 @@
+paused: true
+name: metallb-config
+
+defaultNamespace: default
+
+dependsOn:
+  - selector:
+      matchLabels:
+        infra.component: metallb

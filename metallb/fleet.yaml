@@ -1,0 +1,13 @@
+paused: true
+
+defaultNamespace: default
+labels:
+  infra.component: metallb
+
+helm:
+  releaseName: metallb
+  repo: https://metallb.github.io/metallb
+  chart: metallb
+  version: 0.14.9
+  valueFiles:
+    - values.yaml
