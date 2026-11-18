@@ -1,0 +1,10 @@
+controller:
+  admissionWebhooks:
+    allowSnippetAnnotations: true
+  allowSnippetAnnotations: true
+  service:
+    ports:
+      http: 81
+      https: 444
+  config:
+    use-http2: "false"
