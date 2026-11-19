@@ -6,3 +6,7 @@ dependsOn:
   - selector:
       matchLabels:
         infra.component: metallb
+
+helm:
+  releaseName: metallb-config
+  takeOwnership: true
