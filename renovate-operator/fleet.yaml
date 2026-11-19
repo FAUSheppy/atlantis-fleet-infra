@@ -1,5 +1,4 @@
 defaultNamespace: renovate
-paused: true
 
 labels:
   app: renovate-operator
