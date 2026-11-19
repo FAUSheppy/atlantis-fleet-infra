@@ -1,5 +1,4 @@
 defaultNamespace: nginx-ingress
-paused: true
 helm:
   releaseName: nginx-ingress
   repo: https://kubernetes.github.io/ingress-nginx
