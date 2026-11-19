@@ -1,0 +1,13 @@
+helm:
+  repo: https://traefik.github.io/charts
+  chart: traefik
+  version: 42.4.1
+
+  releaseName: traefik
+  valuesFiles:
+    - values.yaml
+
+  atomic: true
+  takeOwnership: false
+  force: false
+  timeoutSeconds: 600

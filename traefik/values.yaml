@@ -1,13 +1,12 @@
+
 additionalArguments:
   - --api.insecure=true
   - --api.dashboard=true
   - --ping=true
-  - --entrypoints.beats.address=:5044
   - --entrypoints.websecure.proxyProtocol.trustedIPs=0.0.0.0
   - --entrypoints.websecure.transport.respondingTimeouts.readTimeout=0
   - --entrypoints.websecure.transport.respondingTimeouts.writeTimeout=0
   - --entrypoints.websecure.transport.respondingTimeouts.idleTimeout=10m
-  - --providers.kubernetescrd.allowCrossNamespace=true
   - --accesslog=true
 
 deployment:
@@ -15,25 +14,35 @@ deployment:
     prometheus.io/port: "8082"
     prometheus.io/scrape: "true"
 
-global:
-  systemDefaultRegistry: ""
-
-image:
-  repository: rancher/mirrored-library-traefik
-  tag: 2.11.18
+# Use the chart's default Traefik v3 image.
+# Do not retain the old rancher/mirrored-library-traefik:2.11.18 pin.
 
 ingressRoute:
   dashboard:
     enabled: true
 
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+
 priorityClassName: system-cluster-critical
 
 providers:
   kubernetesCRD:
+    enabled: true
     allowCrossNamespace: true
   kubernetesIngress:
+    enabled: true
     publishedService:
       enabled: true
+
+ports:
+  beats:
+    port: 5044
+    exposedPort: 5044
+    protocol: TCP
+    expose:
+      default: true
 
 resources:
   requests:
@@ -43,13 +52,9 @@ resources:
     memory: 1Gi
 
 service:
-  ipFamilyPolicy: PreferDualStack
-  ports:
-    beats:
-      port: 5044
-      expose: true
-      exposedPort: 5044
-      protocol: TCP
+  spec:
+    type: LoadBalancer
+    ipFamilyPolicy: PreferDualStack
 
 tolerations:
   - key: CriticalAddonsOnly
@@ -60,3 +65,4 @@ tolerations:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
     operator: Exists
+
