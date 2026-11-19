@@ -1,4 +1,3 @@
-paused: true
 name: metallb-config
 
 defaultNamespace: default
