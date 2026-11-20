@@ -20,7 +20,7 @@ apiVersion: management.cattle.io/v3
 kind: ProjectRoleTemplateBinding
 metadata:
   name: all-users-shared-project-binding
-  namespace: all-user-shared-namespace
+  namespace: all-user-shared-project
 projectName: local:all-user-shared-project
 roleTemplateName: project-member
 groupPrincipalName: keycloakoidc_group://monitoring
