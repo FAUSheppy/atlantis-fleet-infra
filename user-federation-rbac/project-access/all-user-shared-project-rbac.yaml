@@ -1,26 +1,26 @@
 apiVersion: management.cattle.io/v3
 kind: Project
 metadata:
-  name: gitops-project-test
+  name: all-user-shared-project
   namespace: local
 spec:
   clusterName: local
-  displayName: gitops-project-test
+  displayName: all-user-shared-project
 
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: gitops-project-test
+  name: all-user-shared-namespace
   annotations:
-    field.cattle.io/projectId: local:gitops-project-test
+    field.cattle.io/projectId: local:all-user-shared-project
 
 ---
 apiVersion: management.cattle.io/v3
 kind: ProjectRoleTemplateBinding
 metadata:
-  name: gitops-test-group-member
-  namespace: gitops-project-test
-projectName: local:gitops-project-test
+  name: all-users-shared-project-binding
+  namespace: all-user-shared-namespace
+projectName: local:all-user-shared-project
 roleTemplateName: project-member
 groupPrincipalName: keycloakoidc_group://monitoring
