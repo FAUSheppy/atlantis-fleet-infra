@@ -10,5 +10,5 @@ roleRef:
   name: view
 subjects:
   - kind: Group
-    name: keycloakoidc_group://monitoring
+    name: keycloakoidc_group://opendesk
     apiGroup: rbac.authorization.k8s.io
