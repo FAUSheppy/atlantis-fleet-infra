@@ -1,6 +1,6 @@
 apiVersion: management.cattle.io/v3
 kind: GlobalRoleBinding
 metadata:
-  name: atlantis-admins-global-admin
+  name: rancher-user-global-base
 globalRoleName: user
 groupPrincipalName: keycloakoidc_group://rancher-user
