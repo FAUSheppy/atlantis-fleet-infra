@@ -20,7 +20,7 @@ apiVersion: management.cattle.io/v3
 kind: ProjectRoleTemplateBinding
 metadata:
   name: gitops-test-group-member
-  namespace: local-gitops-project-test
+  namespace: gitops-project-test
 projectName: local:gitops-project-test
 roleTemplateName: project-member
 groupPrincipalName: keycloakoidc_group://monitoring
