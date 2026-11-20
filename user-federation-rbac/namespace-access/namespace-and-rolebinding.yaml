@@ -12,3 +12,27 @@ subjects:
   - kind: Group
     name: keycloakoidc_group://opendesk
     apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: opendesk-dev-namespace-view
+rules:
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    resourceNames: ["opendesk-dev"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: opendesk-dev-namespace-view
+subjects:
+  - kind: Group
+    name: keycloakoidc_group://opendesk
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: opendesk-dev-namespace-view
+  apiGroup: rbac.authorization.k8s.io
