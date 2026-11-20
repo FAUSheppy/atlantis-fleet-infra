@@ -1,0 +1,6 @@
+apiVersion: management.cattle.io/v3
+kind: GlobalRoleBinding
+metadata:
+  name: atlantis-admins-global-admin
+globalRoleName: admin
+groupPrincipalName: keycloakoidc_group://atlantis-admins
