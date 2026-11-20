@@ -1,0 +1,26 @@
+apiVersion: management.cattle.io/v3
+kind: Project
+metadata:
+  name: gitops-project-test
+  namespace: local
+spec:
+  clusterName: local
+  displayName: gitops-project-test
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gitops-project-test
+  annotations:
+    field.cattle.io/projectId: local:gitops-project-test
+
+---
+apiVersion: management.cattle.io/v3
+kind: ProjectRoleTemplateBinding
+metadata:
+  name: gitops-test-group-member
+  namespace: local-gitops-project-test
+projectName: local:gitops-project-test
+roleTemplateName: project-member
+groupPrincipalName: keycloakoidc_group://monitoring

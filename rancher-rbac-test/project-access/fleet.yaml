@@ -1,0 +1,6 @@
+# Fleet GitRepo paths should target this directory explicitly.
+paused: true
+
+defaultNamespace: default
+helm:
+  releaseName: rancher-rbac-project-test

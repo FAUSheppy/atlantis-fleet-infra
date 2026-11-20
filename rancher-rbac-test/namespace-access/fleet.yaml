@@ -1,0 +1,6 @@
+# This bundle is a separate optional test; do not unpause until the subject has been verified.
+paused: true
+
+defaultNamespace: default
+helm:
+  releaseName: rancher-rbac-namespace-test
