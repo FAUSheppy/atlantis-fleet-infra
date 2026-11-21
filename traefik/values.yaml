@@ -1,25 +1,18 @@
+api:
+  dashboard: true
+  insecure: false
 
-additionalArguments:
-  - --api.insecure=false
-  - --api.dashboard=true
-  - --ping=true
-  - --entrypoints.websecure.proxyProtocol.trustedIPs=0.0.0.0
-  - --entrypoints.websecure.transport.respondingTimeouts.readTimeout=0
-  - --entrypoints.websecure.transport.respondingTimeouts.writeTimeout=0
-  - --entrypoints.websecure.transport.respondingTimeouts.idleTimeout=10m
-  - --accesslog=true
+accessLog:
+  enabled: true
 
 deployment:
   podAnnotations:
     prometheus.io/port: "8082"
     prometheus.io/scrape: "true"
 
-# Use the chart's default Traefik v3 image.
-# Do not retain the old rancher/mirrored-library-traefik:2.11.18 pin.
-
 ingressRoute:
   dashboard:
-    enabled: true
+    enabled: false
 
 ingressClass:
   enabled: true
@@ -37,6 +30,16 @@ providers:
       enabled: true
 
 ports:
+  websecure:
+    proxyProtocol:
+      trustedIPs:
+        - 0.0.0.0/0
+    transport:
+      respondingTimeouts:
+        readTimeout: 0
+        writeTimeout: 0
+        idleTimeout: 10m
+
   beats:
     port: 5044
     exposedPort: 5044
@@ -65,4 +68,3 @@ tolerations:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
     operator: Exists
-
