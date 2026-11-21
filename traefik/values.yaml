@@ -1,6 +1,6 @@
 
 additionalArguments:
-  - --api.insecure=true
+  - --api.insecure=false
   - --api.dashboard=true
   - --ping=true
   - --entrypoints.websecure.proxyProtocol.trustedIPs=0.0.0.0
